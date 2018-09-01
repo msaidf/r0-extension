@@ -9,8 +9,8 @@ RUN pip3 install --upgrade pip
 RUN pip3 install jupyter
 
 # INSTALL R KERNEL
-RUN apt-get install -y libzmq3-dev libcurl-openssl1.0-dev libssl-dev
-RUN Rscript -e "install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')))" -e "IRkernel::installspec()"
+RUN apt-get install -y libzmq3-dev
+RUN Rscript -e "install.packages(c('crayon', 'pbdZMQ'))" -e "devtools::install_github(paste0('IRkernel/', c('repr', 'IRdisplay', 'IRkernel')))" -e "IRkernel::installspec()"
 
 # INSTALL JULIA
 ENV JULIA_PATH /usr/local/julia
