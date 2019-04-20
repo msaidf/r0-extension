@@ -1,4 +1,4 @@
-FROM rocker/binder:3.5.1 
+FROM rocker/binder:3.5.3 
 MAINTAINER "Muhamad Said Fathurrohman" muh.said@gmail.com
 
 USER root
