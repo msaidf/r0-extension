@@ -1,4 +1,4 @@
-FROM rocker/binder:3.6
+FROM rocker/binder:3.6.0
 MAINTAINER "Muhamad Said Fathurrohman" muh.said@gmail.com
 
 USER root
@@ -7,4 +7,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/
 RUN pip3 install --no-cache-dir bs4 notedown neovim jupyterlab matplotlib numpy pandas pytrends
-
+RUN pip3 install --no-cache-dir jupyter_nbextensions_configurator jupyter_contrib_nbextensions
+RUN jupyter contrib nbextension install && \
+	jupyter nbextensions_configurator enable
