@@ -8,6 +8,10 @@ RUN jupyter contrib nbextension install && \
 
 USER root
 RUN apt-get update && \
-	apt-get install -y libzmq3-dev python-pip curl bzip2 neovim libv8-3.14-dev libjq-dev libsasl2-dev libsodium-dev && \
+	apt-get install -y libzmq3-dev python-pip curl bzip2 libv8-3.14-dev libjq-dev libsasl2-dev libsodium-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/
+
+RUN install2.r data.table dtplyr reticulate rdrop2 JuliaCall googledrive googleway googlesheets 
+RUN install2.r shiny pkgdown blogdown bookdown revealjs xaringan prettydoc learnr flexdashboard shinydashboard tufte formattable plumber 
+RUN install2.r moonBook reporttools stargazer texreg huxtable DescTools descr compareGroups sjPlot sjlabelled sjmisc qwrap2 desctable tableone expss summarytools
