@@ -1,4 +1,4 @@
-FROM rocker/binder:3.5.3
+FROM rocker/binder:3.6.0
 MAINTAINER "Muhamad Said Fathurrohman" muh.said@gmail.com
 
 RUN pip3 install --no-cache-dir neovim notedown nbdime bookbook RISE bs4 matplotlib numpy pandas pytrends \
@@ -26,3 +26,19 @@ RUN cd /tmp && \
 RUN R CMD INSTALL gEcon_1.1.0.tar.gz && \
     R CMD INSTALL gEcon.iosam_0.2.0.tar.gz && \
     R CMD INSTALL gEcon.estimation_0.1.0.tar.gz
+
+RUN wget https://github.com/git-lfs/git-lfs/releases/download/v2.7.2/git-lfs-linux-amd64-v2.7.2.tar.gz
+RUN tar xzf git-lfs-linux-amd64-v2.7.2.tar.gz
+RUN chmod +x git-lfs
+RUN mv git-lfs /usr/bin/
+RUN git lfs install
+
+RUN wget https://github.com/neovim/neovim/releases/download/v0.3.7/nvim.appimage
+RUN ./nvim.appimage --appimage-extract
+RUN chmod -R 766 squashfs-root
+RUN mv squashfs-root /opt/ 
+RUN cd /usr/bin
+RUN ln -s /opt/squashfs-root/usr/bin/nvim 
+    
+USER rstudio
+RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
