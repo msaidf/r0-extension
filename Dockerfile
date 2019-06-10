@@ -1,4 +1,4 @@
-FROM rocker/binder:3.6.0
+FROM rocker/binder:3.5.3
 MAINTAINER "Muhamad Said Fathurrohman" muh.said@gmail.com
 
 RUN pip3 install --no-cache-dir neovim notedown nbdime bookbook RISE bs4 matplotlib numpy pandas pytrends \
