@@ -2,7 +2,7 @@ FROM rocker/binder:3.6.0
 MAINTAINER "Muhamad Said Fathurrohman" muh.said@gmail.com
 
 RUN pip3 install --no-cache-dir neovim notedown nbdime bookbook RISE bs4 matplotlib numpy pandas pytrends \
-	jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyter-book jupyterlab
+	jupyter_nbextensions_configurator jupyter_contrib_nbextensions jupyterlab
 RUN nbdime config-git --enable --global
 RUN jupyter contrib nbextension install && \
 	jupyter nbextensions_configurator enable
@@ -19,16 +19,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/ && \
     cd /tmp
 
-RUN install2.r import data.table dtplyr reticulate foreach pbapply doMC doRedis janitor rlist glue jsonlite withr pryr rio rdrop2 googledrive googleway googlesheets
+RUN install2.r import data.table dtplyr reticulate drake piggyback foreach pbapply doMC doRedis janitor rlist glue jsonlite withr pryr rio rdrop2 googledrive googleway googlesheets
 RUN install2.r repr IRdisplay nbconvertR shiny pkgdown blogdown bookdown revealjs xaringan prettydoc flexdashboard shinydashboard tufte formattable 
-RUN install2.r moonBook reporttools stargazer texreg huxtable DescTools descr compareGroups qwrap2 desctable tableone expss summarytools sjlabelled sjmisc sjPlot plotly listviewer gridExtra ggplotgui
-RUN install2.r margins xts zoo tsbox clubSandwich multiwayvcov lfe wfe estimatr prophet
-
-RUN wget https://github.com/git-lfs/git-lfs/releases/download/v2.7.2/git-lfs-linux-amd64-v2.7.2.tar.gz
-RUN tar xzf git-lfs-linux-amd64-v2.7.2.tar.gz
-RUN chmod +x git-lfs
-RUN mv git-lfs /usr/bin/
-RUN git lfs install
+RUN install2.r reporttools stargazer texreg huxtable DescTools descr compareGroups qwrap2 desctable expss summarytools sjlabelled sjmisc sjPlot plotly listviewer gridExtra ggplotgui
+RUN install2.r margins xts zoo tsbox clubSandwich multiwayvcov lfe wfe estimatr prophet rdrobust rdlocrand rddensity rdmulti  rdpower rdd rddtools 
 
 RUN wget https://github.com/neovim/neovim/releases/download/v0.3.7/nvim.appimage
 RUN chmod u+x nvim.appimage 
