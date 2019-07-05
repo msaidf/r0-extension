@@ -14,22 +14,21 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN install2.r rio writexl dbplyr DBI odbc pool dbplot MonetDBLite RMariaDB RPostgreSQL RSQLite mongolite redux storr filehash
-RUN install2.r promises futures profvis remotes XML xml2 httr rvest plumber rdrop2 googledrive googleway googlesheets gargle RcppArmadillo  withr pryr
-RUN install2.r drake piggyback import data.table dtplyr reticulate janitor rlist glue jsonlite 
-RUN install2.r foreach pbapply doMC doRedis doParallel synchronicity bigmemory biganalytics bigalgebra biglm bigrquery speedglm 
-RUN install2.r repr IRdisplay formattable shiny pkgdown blogdown bookdown revealjs xaringan prettydoc flexdashboard shinydashboard tufte 
-RUN install2.r reporttools stargazer texreg huxtable DescTools descr compareGroups qwrap2 desctable expss summarytools 
-RUN install2.r gridExtra ggplotgui  prettyB gganimate ggrepel GGally ggthemes ggfortify sjlabelled sjmisc sjPlot DT
-RUN install2.r margins xts zoo tsbox lfe wfe prophet clubSandwich multiwayvcov estimatr rdrobust rdlocrand rddensity rdmulti rdpower rdd rddtools
-RUN install2.r rbokeh dygraphs rCharts ggvis timevis highcharter wordcloud2 ggmap tmap leaflet plotly listviewer compareDF
-RUN install2.r tm tidytext twitteR gtrendsR koRpus udpipe tensorflow h2o sparklyr tabulizerjars tabulizer
-RUN install2.r survival Matching MatchIt cem Amelia mcmc MCMCpack tidybayes shinystan CausalImpact DesignLibrary nleqslv FKF KFAS
-RUN install2.r data.world tradestatistics blscrapeR rdhs countrycode WDI wbstats eurostat OECD pdfetch psData IMFData LabourMarketAreas bea.R
+RUN install2.r -s rio writexl dbplyr DBI odbc pool dbplot MonetDBLite RMariaDB RPostgreSQL RSQLite mongolite bigrquery redux storr filehash arkdb
+RUN install2.r -s promises futures profvis remotes XML xml2 httr crul rvest plumber rdrop2 googledrive googleway googlesheets gargle RcppArmadillo  withr pryr
+RUN install2.r -s drake piggyback import data.table dtplyr reticulate janitor rlist glue jsonlite fs fastLink
+RUN install2.r -s foreach pbapply doMC doRedis doParallel synchronicity bigmemory biganalytics bigalgebra biglm speedglm 
+RUN install2.r -s repr IRdisplay formattable shiny pkgdown blogdown bookdown revealjs xaringan prettydoc flexdashboard shinydashboard tufte officer flextable
+RUN install2.r -s stargazer texreg huxtable DescTools descr compareGroups qwraps2 desctable expss summarytools 
+RUN install2.r -s prettyB gridExtra ggplotgui ggalt hrbrthemes gganimate ggrepel GGally ggthemes ggfortify sjlabelled sjmisc sjPlot DT mschart rvg
+RUN install2.r -s margins xts zoo tsbox lfe wfe prophet clubSandwich multiwayvcov estimatr rdrobust rdlocrand rddensity rdmulti rdpower rdd rddtools
+RUN install2.r -s rbokeh dygraphs r2d3 rCharts ggvis timevis highcharter echarts4r wordcloud2 ggmap tmap leaflet plotly listviewer compareDF diffr
+RUN install2.r -s tm tidytext twitteR gtrendsR koRpus udpipe tensorflow h2o sparklyr tabulizerjars tabulizer
+RUN install2.r -s survival Matching MatchIt cem Amelia mcmc MCMCpack tidybayes shinystan CausalImpact DesignLibrary nleqslv FKF KFAS
+RUN install2.r -s data.world tradestatistics rdhs countrycode WDI wbstats eurostat OECD pdfetch psData IMFData rnoaa fredr
 
-RUN installGithub.r ChristopherLucas/MatchingFrontier kthohr/BMR kolesarm/RDHonest ropensci/rnoaa CommerceDataService/eu.us.opendata jcizel/FredR mwaldstein/edgarWebR abresler/forbesListR sboysel/fredr 
-RUN installGithub.r ropensci/cyphr ropensci/googleLanguageR ropensci/binman ropensci/wdman ropensci/RSelenium ropensci/arkdb
-RUN installGithub.r hrbrmstr/hrbrthemes hrbrmstr/ggalt rstudio/r2d3 kosukeimai/fastLink JohnCoene/echarts4r cttobin/ggthemr yihui/printr mkearney/rmd2jupyter r-lib/fs muschellij2/diffr ropensci/crul
+RUN installGithub.r -u FALSE ChristopherLucas/MatchingFrontier kthohr/BMR kolesarm/RDHonest CommerceDataService/eu.us.opendata abresler/forbesListR 
+RUN installGithub.r -u FALSE ropensci/cyphr ropensci/binman ropensci/wdman ropensci/RSelenium cttobin/ggthemr yihui/printr mkearney/rmd2jupyter
 
 RUN wget http://gecon.r-forge.r-project.org/files/gEcon_1.1.0.tar.gz && \
 	   R CMD INSTALL gEcon_1.1.0.tar.gz && \
