@@ -5,7 +5,7 @@ WORKDIR /opt
 RUN wget https://github.com/neovim/neovim/releases/download/v0.3.7/nvim.appimage && \
     chmod u+x nvim.appimage && \
     ./nvim.appimage --appimage-extract && \
-    chmod -R 766 squashfs-root && \
+    chmod -R 777 squashfs-root && \
     ln -s /opt/squashfs-root/usr/bin/nvim /usr/bin/
 
 RUN apt-get update && \
