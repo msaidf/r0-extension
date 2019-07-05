@@ -15,8 +15,15 @@ RUN echo "PATH=${PATH}" >> /usr/local/lib/R/etc/Renviron
 ENV LD_LIBRARY_PATH /usr/local/lib/R/lib
 
 ENV HOME /home/${NB_USER}
-WORKDIR /opt
 
+WORKDIR /opt
+RUN wget https://github.com/neovim/neovim/releases/download/v0.3.7/nvim.appimage && \
+    chmod u+x nvim.appimage && \
+    ./nvim.appimage --appimage-extract && \
+    chmod -R 766 squashfs-root && \
+    ln -s /opt/squashfs-root/usr/bin/nvim /usr/bin/
+
+WORKDIR ${HOME}
 RUN apt-get update && \
     apt-get -y install python3-venv python3-dev wget curl git bzip2 tmux redis-server 
 RUN apt-get -y install libzmq3-dev libv8-3.14-dev libjq-dev libsasl2-dev libsodium-dev libpoppler-cpp-dev 
@@ -30,12 +37,6 @@ RUN apt-get purge && \
 # This allows non-root to install python libraries if required
 RUN mkdir -p ${VENV_DIR} && chown -R ${NB_USER} ${VENV_DIR}
 
-RUN wget https://github.com/neovim/neovim/releases/download/v0.3.7/nvim.appimage && \
-    chmod u+x nvim.appimage && \
-    ./nvim.appimage --appimage-extract && \
-    chmod -R 766 squashfs-root && \
-    ln -s /opt/squashfs-root/usr/bin/nvim /usr/bin/
-
 RUN install2.r drake piggyback import data.table dtplyr reticulate janitor rlist glue jsonlite withr pryr 
 RUN install2.r foreach pbapply doMC doRedis doParallel rio rdrop2 googledrive googleway googlesheets
 RUN install2.r repr IRdisplay nbconvertR  formattable 
@@ -45,14 +46,14 @@ RUN install2.r sjlabelled gridExtra ggplotgui sjmisc sjPlot plotly listviewer
 RUN install2.r margins xts zoo tsbox lfe wfe prophet 
 RUN install2.r clubSandwich multiwayvcov estimatr rdrobust rdlocrand rddensity rdmulti rdpower rdd rddtools
 
-WORKDIR ${HOME}
+
 USER ${NB_USER}
 
 RUN python3 -m venv ${VENV_DIR} && \
     # Explicitly install a new enough version of pip
-    pip3 install pip==9.0.1 && \
+    pip3 install pip && \
     pip3 install --no-cache-dir \
-         nbrsessionproxy==0.6.1 && \
+         nbrsessionproxy && \
     jupyter serverextension enable --sys-prefix --py nbrsessionproxy && \
     jupyter nbextension install    --sys-prefix --py nbrsessionproxy && \
     jupyter nbextension enable     --sys-prefix --py nbrsessionproxy
