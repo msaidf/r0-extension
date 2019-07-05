@@ -14,7 +14,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN install2.r rio dbplyr DBI odbc pool dbplot MonetDBLite RMariaDB RPostgreSQL RSQLite mongolite redux storr filehash
+RUN install2.r rio writexl dbplyr DBI odbc pool dbplot MonetDBLite RMariaDB RPostgreSQL RSQLite mongolite redux storr filehash
 RUN install2.r promises futures profvis remotes XML xml2 httr rvest plumber rdrop2 googledrive googleway googlesheets gargle RcppArmadillo  withr pryr
 RUN install2.r drake piggyback import data.table dtplyr reticulate janitor rlist glue jsonlite 
 RUN install2.r foreach pbapply doMC doRedis doParallel synchronicity bigmemory biganalytics bigalgebra biglm bigrquery speedglm 
