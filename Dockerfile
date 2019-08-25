@@ -1,44 +1,32 @@
-FROM rocker/binder:3.6.0
+FROM rocker/geospatial:3.6.0
 MAINTAINER "Muhamad Said Fathurrohman" muh.said@gmail.com
 
-RUN pip3 install --no-cache-dir neovim notedown nbdime bookbook RISE bs4 matplotlib numpy pandas pytrends \
-	jupyter_nbextensions_configurator jupyter_contrib_nbextensions
-RUN nbdime config-git --enable --global
-RUN jupyter contrib nbextension install && \
-	jupyter nbextensions_configurator enable
-
-
-USER root
 RUN apt-get update && \
-	apt-get install -y python-pip wget curl git bzip2 tmux redis-server libzmq3-dev libv8-3.14-dev libjq-dev libsasl2-dev libsodium-dev libpoppler-cpp-dev && \
+    apt-get -y install curl git bzip2 tmux redis-server libzmq3-dev libv8-3.14-dev libjq-dev libsasl2-dev libsodium-dev libpoppler-cpp-dev  && \
+    apt-get purge && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/
+    rm -rf /var/lib/apt/lists/*
 
-RUN install2.r data.table dtplyr reticulate foreach pbapply doMC doRedis janitor rlist glue jsonlite withr pryr rio rdrop2 googledrive googleway googlesheets
-RUN install2.r repr IRdisplay shiny pkgdown blogdown bookdown revealjs xaringan prettydoc learnr flexdashboard shinydashboard tufte formattable 
-RUN install2.r moonBook reporttools stargazer texreg huxtable DescTools descr compareGroups plotly qwrap2 desctable tableone expss summarytools sjlabelled sjmisc sjPlot gridExtra ggplotgui listviewer
-RUN install2.r margins xts zoo tsbox clubSandwich multiwayvcov lfe wfe estimatr prophet
+RUN install2.r -s rio writexl dbplyr DBI odbc pool dbplot MonetDBLite RMariaDB RPostgreSQL RSQLite mongolite bigrquery redux storr filehash arkdb
+RUN install2.r -s promises futures profvis remotes XML xml2 httr crul rvest plumber rdrop2 googledrive googleway googlesheets gargle RcppArmadillo  withr pryr
+RUN install2.r -s drake piggyback import data.table dtplyr reticulate janitor rlist glue jsonlite fs fastLink
+RUN install2.r -s foreach pbapply doMC doRedis doParallel synchronicity bigmemory biganalytics bigalgebra biglm speedglm 
+RUN install2.r -s repr IRdisplay formattable shiny pkgdown blogdown bookdown revealjs xaringan prettydoc flexdashboard shinydashboard tufte officer flextable
+RUN install2.r -s stargazer texreg huxtable DescTools descr compareGroups qwraps2 desctable expss summarytools 
+RUN install2.r -s prettyB gridExtra ggplotgui ggalt hrbrthemes gganimate ggrepel GGally ggthemes ggfortify sjlabelled sjmisc sjPlot DT mschart rvg
+RUN install2.r -s margins xts zoo tsbox lfe wfe prophet clubSandwich multiwayvcov estimatr rdrobust rdlocrand rddensity rdmulti rdpower rdd rddtools
+RUN install2.r -s rbokeh dygraphs r2d3 rCharts ggvis timevis highcharter echarts4r wordcloud2 ggmap tmap leaflet plotly listviewer compareDF diffr
+RUN install2.r -s tm tidytext twitteR gtrendsR koRpus udpipe tensorflow h2o sparklyr tabulizerjars tabulizer
+RUN install2.r -s survival Matching MatchIt cem Amelia mcmc MCMCpack tidybayes shinystan CausalImpact DesignLibrary nleqslv FKF KFAS
+RUN install2.r -s data.world tradestatistics rdhs countrycode WDI wbstats eurostat OECD pdfetch psData IMFData rnoaa fredr
 
-RUN cd /tmp && \
-     wget http://gecon.r-forge.r-project.org/files/gEcon_1.1.0.tar.gz && \
-     wget http://gecon.r-forge.r-project.org/files/gEcon.iosam_0.2.0.tar.gz && \
-     wget http://gecon.r-forge.r-project.org/files/gEcon.estimation_0.1.0.tar.gz 
-RUN R CMD INSTALL gEcon_1.1.0.tar.gz && \
-    R CMD INSTALL gEcon.iosam_0.2.0.tar.gz && \
-    R CMD INSTALL gEcon.estimation_0.1.0.tar.gz
+RUN installGithub.r -u FALSE ChristopherLucas/MatchingFrontier kthohr/BMR kolesarm/RDHonest CommerceDataService/eu.us.opendata setzler/eventStudy/eventStudy 
+RUN installGithub.r -u FALSE ropensci/cyphr ropensci/binman ropensci/wdman ropensci/RSelenium cttobin/ggthemr yihui/printr mkearney/rmd2jupyter
 
-RUN wget https://github.com/git-lfs/git-lfs/releases/download/v2.7.2/git-lfs-linux-amd64-v2.7.2.tar.gz
-RUN tar xzf git-lfs-linux-amd64-v2.7.2.tar.gz
-RUN chmod +x git-lfs
-RUN mv git-lfs /usr/bin/
-RUN git lfs install
-
-RUN wget https://github.com/neovim/neovim/releases/download/v0.3.7/nvim.appimage
-RUN ./nvim.appimage --appimage-extract
-RUN chmod -R 766 squashfs-root
-RUN mv squashfs-root /opt/ 
-RUN cd /usr/bin
-RUN ln -s /opt/squashfs-root/usr/bin/nvim 
-    
-USER rstudio
-RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+WORKDIR /tmp
+RUN wget http://gecon.r-forge.r-project.org/files/gEcon_1.1.0.tar.gz && \
+	   R CMD INSTALL gEcon_1.1.0.tar.gz && \
+	   wget http://gecon.r-forge.r-project.org/files/gEcon.iosam_0.2.0.tar.gz && \
+	   R CMD INSTALL gEcon.iosam_0.2.0.tar.gz && \
+	   wget http://gecon.r-forge.r-project.org/files/gEcon.estimation_0.1.0.tar.gz && \
+	   R CMD INSTALL gEcon.estimation_0.1.0.tar.gz
