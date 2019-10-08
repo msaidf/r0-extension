@@ -8,14 +8,14 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN install2.r -s rio writexl dbplyr DBI odbc pool dbplot MonetDBLite RMariaDB RPostgreSQL RSQLite mongolite bigrquery redux storr filehash arkdb
-RUN install2.r -s promises futures profvis remotes XML xml2 httr crul rvest plumber rdrop2 googledrive googleway googlesheets gargle RcppArmadillo  withr pryr
+RUN install2.r -s promises futures profvis remotes XML xml2 httr crul rvest plumber googleway googlesheets gargle RcppArmadillo withr pryr
 RUN install2.r -s drake piggyback import data.table dtplyr reticulate janitor rlist glue jsonlite fs fastLink tsibble tsibbledata
-RUN install2.r -s foreach pbapply doMC doRedis doParallel synchronicity bigmemory biganalytics bigalgebra biglm speedglm 
-RUN install2.r -s repr IRdisplay formattable shiny pkgdown blogdown bookdown revealjs xaringan prettydoc flexdashboard shinydashboard tufte officer flextable
+RUN install2.r -s foreach pbapply doMC doRedis doParallel bigmemory bigtabulate biganalytics bigalgebra biglm speedglm 
+RUN install2.r -s repr IRdisplay formattable shiny pkgdown blogdown bookdown revealjs xaringan flexdashboard shinydashboard tufte officer flextable
 RUN install2.r -s stargazer texreg huxtable DescTools descr compareGroups qwraps2 desctable expss summarytools 
-RUN install2.r -s prettyB gridExtra ggplotgui ggalt hrbrthemes gganimate ggrepel GGally ggthemes ggfortify sjlabelled sjmisc sjPlot DT mschart rvg
+RUN install2.r -s prettyB gridExtra ggplotgui ggalt hrbrthemes gganimate ggrepel GGally ggthemes ggfortify sjlabelled sjmisc sjPlot DT mschart
 RUN install2.r -s margins xts zoo tsbox tidyquant lfe wfe clubSandwich multiwayvcov estimatr rdrobust rdlocrand rddensity rdmulti rdpower rdd rddtools prophet fable feasts RATest EventStudy
-RUN install2.r -s rbokeh dygraphs r2d3 rCharts ggvis timevis highcharter echarts4r wordcloud2 ggmap tmap leaflet plotly listviewer compareDF diffr igraph DiagrammeR
+RUN install2.r -s rbokeh dygraphs rCharts ggvis timevis echarts4r wordcloud2 ggmap tmap leaflet plotly listviewer compareDF diffr igraph DiagrammeR
 RUN install2.r -s tm tidytext twitteR gtrendsR koRpus udpipe tensorflow h2o sparklyr tabulizerjars tabulizer greta
 RUN install2.r -s survival Matching MatchIt cem Amelia mcmc MCMCpack tidybayes rstan shinystan CausalImpact DesignLibrary nleqslv FKF KFAS
 RUN install2.r -s data.world tradestatistics rdhs countrycode WDI wbstats eurostat OECD pdfetch psData IMFData rnoaa fredr
