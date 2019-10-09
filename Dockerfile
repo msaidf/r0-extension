@@ -14,11 +14,11 @@ RUN install2.r -s foreach pbapply doMC doRedis doParallel biglm speedglm
 RUN install2.r -s repr IRdisplay formattable shiny pkgdown blogdown bookdown revealjs xaringan flexdashboard shinydashboard tufte officer flextable
 RUN install2.r -s xts zoo tsbox tidyquant prophet fable feasts tsibble tsibbledata 
 RUN install2.r -s margins lfe wfe clubSandwich multiwayvcov estimatr rdrobust rdlocrand rddensity rdmulti rdpower rdd rddtools RATest EventStudy
-RUN install2.r -s tm tidytext twitteR gtrendsR koRpus udpipe tensorflow h2o sparklyr tabulizerjars tabulizer greta
-RUN install2.r -s survival Matching MatchIt cem Amelia mcmc MCMCpack tidybayes rstan shinystan CausalImpact DesignLibrary nleqslv FKF KFAS
-RUN install2.r -s stargazer texreg huxtable DescTools descr compareGroups qwraps2 desctable expss summarytools 
-RUN install2.r -s prettyB gridExtra ggplotgui ggalt hrbrthemes gganimate ggrepel GGally ggthemes ggfortify sjlabelled sjmisc sjPlot DT mschart
-RUN install2.r -s rbokeh dygraphs rCharts ggvis timevis echarts4r wordcloud2 ggmap tmap leaflet plotly listviewer compareDF diffr igraph DiagrammeR
+RUN install2.r -s tm tidytext twitteR gtrendsR koRpus udpipe tensorflow h2o sparklyr tabulizerjars tabulizer
+RUN install2.r -s survival Matching MatchIt cem Amelia mcmc MCMCpack tidybayes rstan shinystan CausalImpact greta DesignLibrary nleqslv FKF KFAS
+RUN install2.r -s stargazer texreg huxtable DescTools descr compareGroups qwraps2 desctable expss summarytools sjlabelled sjmisc 
+RUN install2.r -s prettyB gridExtra ggplotgui ggalt hrbrthemes gganimate ggrepel GGally ggthemes ggfortify sjPlot DT mschart
+RUN install2.r -s dygraphs rCharts ggvis timevis echarts4r wordcloud2 ggmap tmap leaflet plotly listviewer compareDF diffr igraph DiagrammeR
 RUN install2.r -s data.world tradestatistics rdhs countrycode WDI wbstats eurostat OECD pdfetch psData IMFData rnoaa fredr
 
 RUN installGithub.r -u FALSE ChristopherLucas/MatchingFrontier kthohr/BMR kolesarm/RDHonest CommerceDataService/eu.us.opendata abresler/forbesListR
